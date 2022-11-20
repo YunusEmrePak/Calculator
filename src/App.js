@@ -6,11 +6,9 @@ let plusCount = 0,
   minusCount = 0,
   multiCount = 0,
   divideCount = 0,
-  modCount = 0,
-  dotCount = 0;
+  modCount = 0;
 function App() {
   const [input, setInput] = useState("");
-
   function changeInput(
     updatedInput,
     end = false,
@@ -20,11 +18,13 @@ function App() {
     minus = false,
     multi = false,
     divide = false,
-    mod = false
+    mod = false,
+    backspace = false
   ) {
     let text = input;
     if (!end) {
       text += updatedInput;
+      console.log(updatedInput);
       setInput(text);
       if (control) {
         conc += parseFloat(text, 10);
@@ -45,6 +45,11 @@ function App() {
       if (clear) {
         text = "";
         setInput("");
+      }
+      if (backspace) {
+        let len = text.length;
+        setInput(text.slice(0, len - 4));
+        backspace = false;
       }
     } else if (end) {
       if (plusCount != 0) {
@@ -76,7 +81,22 @@ function App() {
         <Nav currentInput={input} />
       </div>
       <div className="row row1 clear">
-        {<Buttons value="<--" class="clearLast" />}
+        {
+          <Buttons
+            value="<--"
+            class="clearLast"
+            changeInput={changeInput}
+            backspace={true}
+          />
+        }
+        {
+          <Buttons
+            value="Clear"
+            class="clearElements"
+            changeInput={changeInput}
+            clear={true}
+          />
+        }
         {
           <Buttons
             value="%"
@@ -88,19 +108,6 @@ function App() {
         }
         {
           <Buttons
-            value="Clear"
-            class="clearElements"
-            changeInput={changeInput}
-            clear={true}
-          />
-        }
-      </div>
-      <div className="row row2">
-        {<Buttons value="7" class="number7" changeInput={changeInput} />}
-        {<Buttons value="8" class="number8" changeInput={changeInput} />}
-        {<Buttons value="9" class="number9" changeInput={changeInput} />}
-        {
-          <Buttons
             value="/"
             class="divide"
             changeInput={changeInput}
@@ -109,10 +116,10 @@ function App() {
           />
         }
       </div>
-      <div className="row row3">
-        {<Buttons value="4" class="number4" changeInput={changeInput} />}
-        {<Buttons value="5" class="number5" changeInput={changeInput} />}
-        {<Buttons value="6" class="number6" changeInput={changeInput} />}
+      <div className="row row2">
+        {<Buttons value="7" class="number7" changeInput={changeInput} />}
+        {<Buttons value="8" class="number8" changeInput={changeInput} />}
+        {<Buttons value="9" class="number9" changeInput={changeInput} />}
         {
           <Buttons
             value="*"
@@ -123,10 +130,10 @@ function App() {
           />
         }
       </div>
-      <div className="row row4">
-        {<Buttons value="1" class="number1" changeInput={changeInput} />}
-        {<Buttons value="2" class="number2" changeInput={changeInput} />}
-        {<Buttons value="3" class="number3" changeInput={changeInput} />}
+      <div className="row row3">
+        {<Buttons value="4" class="number4" changeInput={changeInput} />}
+        {<Buttons value="5" class="number5" changeInput={changeInput} />}
+        {<Buttons value="6" class="number6" changeInput={changeInput} />}
         {
           <Buttons
             value="-"
@@ -134,6 +141,20 @@ function App() {
             changeInput={changeInput}
             control={true}
             minus={true}
+          />
+        }
+      </div>
+      <div className="row row4">
+        {<Buttons value="1" class="number1" changeInput={changeInput} />}
+        {<Buttons value="2" class="number2" changeInput={changeInput} />}
+        {<Buttons value="3" class="number3" changeInput={changeInput} />}
+        {
+          <Buttons
+            value="+"
+            class="add"
+            changeInput={changeInput}
+            control={true}
+            plus={true}
           />
         }
       </div>
@@ -146,15 +167,6 @@ function App() {
             class="equal"
             changeInput={changeInput}
             ender={true}
-          />
-        }
-        {
-          <Buttons
-            value="+"
-            class="add"
-            changeInput={changeInput}
-            control={true}
-            plus={true}
           />
         }
       </div>

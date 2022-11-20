@@ -20,7 +20,7 @@ export function Buttons(props) {
       props.multi,
       props.divide,
       props.mod,
-      props.dot
+      props.backspace
     );
   }
 
