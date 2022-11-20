@@ -24,7 +24,6 @@ function App() {
     let text = input;
     if (!end) {
       text += updatedInput;
-      console.log(updatedInput);
       setInput(text);
       if (control) {
         conc += parseFloat(text, 10);
