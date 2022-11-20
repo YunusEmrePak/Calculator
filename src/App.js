@@ -20,8 +20,7 @@ function App() {
     minus = false,
     multi = false,
     divide = false,
-    mod = false,
-    dot = false
+    mod = false
   ) {
     let text = input;
     if (!end) {
@@ -41,8 +40,6 @@ function App() {
           divideCount += 1;
         } else if (mod) {
           modCount += 1;
-        } else if (dot) {
-          dotCount += 1;
         }
       }
       if (clear) {
@@ -142,7 +139,7 @@ function App() {
       </div>
       <div className="row row5">
         {<Buttons value="0" class="number0" changeInput={changeInput} />}
-        {<Buttons value="." class="dot" changeInput={changeInput} dot={true} />}
+        {<Buttons value="." class="dot" changeInput={changeInput} />}
         {
           <Buttons
             value="="
