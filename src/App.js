@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import { Nav, Buttons } from "./Buttons";
 
 let conc = 0;
-let plusCount = 0, minusCount = 0, multiCount = 0, divideCount = 0, modCount = 0;
+let plusCount = 0, minusCount = 0, multiCount = 0, divideCount = 0, modCount = 0, dotCount = 0;
 function App() {
   const [input, setInput] = useState("");
 
-  function changeInput(updatedInput, end = false, control = false, clear = false, plus = false, minus = false, multi = false, divide = false, mod = false) {
+  function changeInput(updatedInput, end = false, control = false, clear = false, plus = false, minus = false, multi = false, divide = false, mod = false, dot = false) {
     let text = input;
     if (!end) {
       text += updatedInput;
       setInput(text);
       if (control) {
-        conc += parseInt(text, 10);
+        conc += parseFloat(text, 10);
         text = '';
         setInput('');
         if (plus) {
@@ -30,33 +30,34 @@ function App() {
         else if (mod) {
             modCount += 1;
         }
+        else if (dot) {
+          dotCount += 1;
+        }
       }
       if (clear) {
         text = '';
         setInput('');
       }
-
-    
     } 
     else if (end){
         if (plusCount != 0) {
-            conc += parseInt(text, 10);
-            plusCount = 0;
+          conc += parseFloat(text, 10);
+          plusCount = 0;
         }
         else if (minusCount != 0) {
-            conc -= parseInt(text, 10);
+            conc -= parseFloat(text, 10);
             minusCount = 0;
         }
         else if (multiCount != 0) {
-            conc *= parseInt(text, 10);
+            conc *= parseFloat(text, 10);
             multiCount = 0;
         }
         else if (divideCount != 0) {
-            conc /= parseInt(text, 10);
+            conc /= parseFloat(text, 10);
             divideCount = 0;
         }
         else if (modCount != 0) {
-            conc %= parseInt(text, 10);
+            conc %= parseFloat(text, 10);
             modCount = 0;
         }
         text = '';
@@ -98,7 +99,7 @@ function App() {
       </div>
       <div className="row row5">
         {<Buttons value="0" class="number0" changeInput={changeInput} />}
-        {<Buttons value="." class="dot" changeInput={changeInput} />}
+        {<Buttons value="." class="dot" changeInput={changeInput} dot={true} />}
         {<Buttons value="=" class="equal" changeInput={changeInput} ender={true}/>}
         {<Buttons value="+" class="add" changeInput={changeInput} control={true} plus={true} />}
       </div>

@@ -10,7 +10,7 @@ export function Nav({ currentInput }) {
 
 export function Buttons(props) {
   function Calculation() {
-    props.changeInput(props.value, props.ender, props.control, props.clear, props.plus, props.minus, props.multi, props.divide, props.mod);
+    props.changeInput(props.value, props.ender, props.control, props.clear, props.plus, props.minus, props.multi, props.divide, props.mod, props.dot);
   }
 
   return (
