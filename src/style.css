@@ -1,0 +1,27 @@
+.back {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+}
+
+.back button {
+    width: 100px;
+    height: 100px;
+}
+
+.back .clearElements {
+    width: 200px;
+}
+
+.inpDiv {
+    width: 400px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightblue;
+}
